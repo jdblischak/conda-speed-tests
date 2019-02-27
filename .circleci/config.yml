@@ -40,6 +40,9 @@ jobs:
       - run:
           name: bioconductor-biobase from bioconda
           command: bash scripts/test-bioconductor-biobase.sh
+       - run:
+          name: bioconductor-limma from bioconda
+          command: bash scripts/test-bioconductor-limma.sh
       - store_artifacts:
           path: list/
           destination: list
@@ -89,6 +92,9 @@ jobs:
       - run:
           name: bioconductor-biobase from bioconda
           command: bash scripts/test-bioconductor-biobase.sh
+       - run:
+          name: bioconductor-limma from bioconda
+          command: bash scripts/test-bioconductor-limma.sh
       - store_artifacts:
           path: list/
           destination: list
@@ -138,6 +144,9 @@ jobs:
       - run:
           name: bioconductor-biobase from bioconda
           command: bash scripts/test-bioconductor-biobase.sh
+       - run:
+          name: bioconductor-limma from bioconda
+          command: bash scripts/test-bioconductor-limma.sh
       - store_artifacts:
           path: list/
           destination: list
