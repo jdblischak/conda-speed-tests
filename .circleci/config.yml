@@ -9,7 +9,7 @@ jobs:
           name: System installation
           command: |
             apt-get update
-            apt-get install --yes --no-install recommends \
+            apt-get install --yes --no-install-recommends \
               time
       - run:
           name: conda setup
