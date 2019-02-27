@@ -1,6 +1,8 @@
 version: 2
 jobs:
   conda_4.2.12:
+    environment:
+      VER: 4.2.12
     docker:
       - image: continuumio/miniconda3:4.2.12
     steps:
@@ -14,7 +16,7 @@ jobs:
       - run:
           name: numpy from defaults
           command: |
-            /usr/bin/time -f "%e %U %S %P %M" -o time.txt conda install -vv --quiet numpy 2> log.txt
+            bash scripts/time.txt conda install -vv --quiet numpy
       - store_artifacts:
           path: time.txt
       - store_artifacts:
