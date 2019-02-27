@@ -19,6 +19,12 @@ jobs:
       - run:
           name: numpy from conda-forge
           command: bash scripts/test-numpy-cf.sh
+      - run:
+          name: scikit-learn from defaults
+          command: bash scripts/test-scikit-learn-defaults.sh
+      - run:
+          name: scikit-learn from conda-forge
+          command: bash scripts/test-scikit-learn-cf.sh
       - store_artifacts:
           path: list/
           destination: list
@@ -47,6 +53,12 @@ jobs:
       - run:
           name: numpy from conda-forge
           command: bash scripts/test-numpy-cf.sh
+      - run:
+          name: scikit-learn from defaults
+          command: bash scripts/test-scikit-learn-defaults.sh
+      - run:
+          name: scikit-learn from conda-forge
+          command: bash scripts/test-scikit-learn-cf.sh
       - store_artifacts:
           path: list/
           destination: list
@@ -75,6 +87,12 @@ jobs:
       - run:
           name: numpy from conda-forge
           command: bash scripts/test-numpy-cf.sh
+      - run:
+          name: scikit-learn from defaults
+          command: bash scripts/test-scikit-learn-defaults.sh
+      - run:
+          name: scikit-learn from conda-forge
+          command: bash scripts/test-scikit-learn-cf.sh
       - store_artifacts:
           path: list/
           destination: list
