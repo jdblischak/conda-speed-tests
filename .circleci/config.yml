@@ -1,15 +1,5 @@
 version: 2
 jobs:
-  conda_4.1.11:
-  # -v flag not yet implemented
-    docker:
-      - image: continuumio/miniconda3:4.1.11
-    steps:
-      - checkout
-      - run: apt-get update && apt-get install --yes time
-      - run: /usr/bin/time -f "%e %U %S %P %M" -o time.txt conda install --quiet numpy 2> log.txt
-      - store_artifacts:
-          path: time.txt
   conda_4.2.12:
     docker:
       - image: continuumio/miniconda3:4.2.12
@@ -22,6 +12,13 @@ jobs:
             apt-get install --yes --no-install recommends \
               time
       - run:
+          name: conda setup
+          run: |
+            conda config --set always_yes yes
+            conda config --set changeps1 no
+            conda config --set auto_update_conda no
+            conda config --set notify_outdated_conda no
+      - run:
           name: numpy from defaults
           run: |
             /usr/bin/time -f "%e %U %S %P %M" -o time.txt conda install -vv --quiet numpy 2> log.txt
@@ -31,6 +28,5 @@ workflows:
   version: 2
   all:
     jobs:
-      - conda_4.1.11
       - conda_4.2.12
 
