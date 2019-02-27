@@ -21,10 +21,13 @@ jobs:
           command: bash scripts/test-numpy-cf.sh
       - store_artifacts:
           path: list/
+          destination: list
       - store_artifacts:
           path: log/
+          destination: log
       - store_artifacts:
           path: time/
+          destination: time
 workflows:
   version: 2
   all:
