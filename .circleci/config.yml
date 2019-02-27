@@ -28,9 +28,38 @@ jobs:
       - store_artifacts:
           path: time/
           destination: time
+  conda_4.3.27p0:
+    environment:
+      VER: 4.3.27p0
+    docker:
+      - image: continuumio/miniconda3:4.3.27p0
+    steps:
+      - checkout
+      - run:
+          name: Install system dependencies
+          command: bash scripts/install-system.sh
+      - run:
+          name: Configure conda
+          command: bash scripts/config-conda.sh
+      - run:
+          name: numpy from defaults
+          command: bash scripts/test-numpy-defaults.sh
+      - run:
+          name: numpy from conda-forge
+          command: bash scripts/test-numpy-cf.sh
+      - store_artifacts:
+          path: list/
+          destination: list
+      - store_artifacts:
+          path: log/
+          destination: log
+      - store_artifacts:
+          path: time/
+          destination: time
 workflows:
   version: 2
   all:
     jobs:
       - conda_4.2.12
+      - conda_4.3.27p0
 
