@@ -18,9 +18,9 @@ jobs:
           command: |
             bash scripts/time.sh conda install -vv --quiet numpy
       - store_artifacts:
-          path: time_${VER}.txt
+          path: time/
       - store_artifacts:
-          path: log_${VER}.txt
+          path: log/
 workflows:
   version: 2
   all:

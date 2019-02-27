@@ -5,9 +5,11 @@ set -e
 #
 # VER: environment variable of conda version
 #
-# Write time to time_${VER}.txt
+# Write time to time/time_${VER}.txt
 #
-# Write standard error to log_${VER}.txt
+# Write standard error to log/log_${VER}.txt
 
-/usr/bin/time -f "%e %U %S %P %M" -o time_${VER}.txt $* 2> log_${VER}.txt
+mkdir -p log/ time/
+
+/usr/bin/time -f "%e %U %S %P %M" -o time/time_${VER}.txt $* 2> log/log_${VER}.txt
 
