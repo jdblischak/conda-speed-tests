@@ -17,6 +17,7 @@ jobs:
             /usr/bin/time -f "%e %U %S %P %M" -o time.txt conda install -vv --quiet numpy 2> log.txt
       - store_artifacts:
           path: time.txt
+      - store_artifacts:
           path: log.txt
 workflows:
   version: 2
