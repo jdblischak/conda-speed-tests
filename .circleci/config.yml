@@ -25,6 +25,12 @@ jobs:
       - run:
           name: scikit-learn from conda-forge
           command: bash scripts/test-scikit-learn-cf.sh
+      - run:
+          name: r-base from defaults
+          command: bash scripts/test-r-base-defaults.sh
+      - run:
+          name: r-base from conda-forge
+          command: bash scripts/test-r-base-cf.sh
       - store_artifacts:
           path: list/
           destination: list
@@ -59,6 +65,12 @@ jobs:
       - run:
           name: scikit-learn from conda-forge
           command: bash scripts/test-scikit-learn-cf.sh
+      - run:
+          name: r-base from defaults
+          command: bash scripts/test-r-base-defaults.sh
+      - run:
+          name: r-base from conda-forge
+          command: bash scripts/test-r-base-cf.sh
       - store_artifacts:
           path: list/
           destination: list
@@ -93,6 +105,12 @@ jobs:
       - run:
           name: scikit-learn from conda-forge
           command: bash scripts/test-scikit-learn-cf.sh
+      - run:
+          name: r-base from defaults
+          command: bash scripts/test-r-base-defaults.sh
+      - run:
+          name: r-base from conda-forge
+          command: bash scripts/test-r-base-cf.sh
       - store_artifacts:
           path: list/
           destination: list
