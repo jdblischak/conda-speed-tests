@@ -7,20 +7,20 @@ jobs:
       - checkout
       - run:
           name: System installation
-          run: |
+          command: |
             apt-get update
             apt-get install --yes --no-install recommends \
               time
       - run:
           name: conda setup
-          run: |
+          command: |
             conda config --set always_yes yes
             conda config --set changeps1 no
             conda config --set auto_update_conda no
             conda config --set notify_outdated_conda no
       - run:
           name: numpy from defaults
-          run: |
+          command: |
             /usr/bin/time -f "%e %U %S %P %M" -o time.txt conda install -vv --quiet numpy 2> log.txt
       - store_artifacts:
           path: time.txt
