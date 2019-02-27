@@ -16,6 +16,9 @@ jobs:
       - run:
           name: numpy from defaults
           command: bash scripts/test-numpy-defaults.sh
+      - run:
+          name: numpy from conda-forge
+          command: bash scripts/test-numpy-cf.sh
       - store_artifacts:
           path: list/
       - store_artifacts:
