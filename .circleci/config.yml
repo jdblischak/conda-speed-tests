@@ -43,6 +43,9 @@ jobs:
        - run:
           name: bioconductor-limma from bioconda
           command: bash scripts/test-bioconductor-limma.sh
+       - run:
+          name: r-workflowr from jdblischak
+          command: bash scripts/test-r-workflowr-jdblischak.sh
       - store_artifacts:
           path: list/
           destination: list
@@ -95,6 +98,9 @@ jobs:
        - run:
           name: bioconductor-limma from bioconda
           command: bash scripts/test-bioconductor-limma.sh
+       - run:
+          name: r-workflowr from jdblischak
+          command: bash scripts/test-r-workflowr-jdblischak.sh
       - store_artifacts:
           path: list/
           destination: list
@@ -147,6 +153,9 @@ jobs:
        - run:
           name: bioconductor-limma from bioconda
           command: bash scripts/test-bioconductor-limma.sh
+       - run:
+          name: r-workflowr from jdblischak
+          command: bash scripts/test-r-workflowr-jdblischak.sh
       - store_artifacts:
           path: list/
           destination: list
