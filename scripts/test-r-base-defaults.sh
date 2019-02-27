@@ -3,6 +3,7 @@ set -eux
 
 # Install r-base from defaults
 
+conda config --add channels r
 conda config --add channels defaults
 conda create --quiet -n r-base-defaults python
 
