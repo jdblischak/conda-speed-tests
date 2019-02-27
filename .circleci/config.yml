@@ -16,11 +16,11 @@ jobs:
       - run:
           name: numpy from defaults
           command: |
-            bash scripts/time.txt conda install -vv --quiet numpy
+            bash scripts/time.sh conda install -vv --quiet numpy
       - store_artifacts:
-          path: time.txt
+          path: time_${VER}.txt
       - store_artifacts:
-          path: log.txt
+          path: log_${VER}.txt
 workflows:
   version: 2
   all:
