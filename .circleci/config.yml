@@ -15,12 +15,13 @@ jobs:
           command: bash scripts/config-conda.sh
       - run:
           name: numpy from defaults
-          command: |
-            bash scripts/time.sh conda install -vv --quiet numpy
+          command: bash scripts/test-numpy-defaults.sh
       - store_artifacts:
-          path: time/
+          path: list/
       - store_artifacts:
           path: log/
+      - store_artifacts:
+          path: time/
 workflows:
   version: 2
   all:
