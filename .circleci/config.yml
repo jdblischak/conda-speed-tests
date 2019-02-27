@@ -31,6 +31,15 @@ jobs:
       - run:
           name: r-base from conda-forge
           command: bash scripts/test-r-base-cf.sh
+      - run:
+          name: r-devtools from defaults
+          command: bash scripts/test-r-devtools-defaults.sh
+      - run:
+          name: r-devtools from conda-forge
+          command: bash scripts/test-r-devtools-cf.sh
+      - run:
+          name: bioconductor-biobase from bioconda
+          command: bash scripts/test-bioconductor-biobase.sh
       - store_artifacts:
           path: list/
           destination: list
@@ -71,6 +80,15 @@ jobs:
       - run:
           name: r-base from conda-forge
           command: bash scripts/test-r-base-cf.sh
+      - run:
+          name: r-devtools from defaults
+          command: bash scripts/test-r-devtools-defaults.sh
+      - run:
+          name: r-devtools from conda-forge
+          command: bash scripts/test-r-devtools-cf.sh
+      - run:
+          name: bioconductor-biobase from bioconda
+          command: bash scripts/test-bioconductor-biobase.sh
       - store_artifacts:
           path: list/
           destination: list
@@ -111,6 +129,15 @@ jobs:
       - run:
           name: r-base from conda-forge
           command: bash scripts/test-r-base-cf.sh
+      - run:
+          name: r-devtools from defaults
+          command: bash scripts/test-r-devtools-defaults.sh
+      - run:
+          name: r-devtools from conda-forge
+          command: bash scripts/test-r-devtools-cf.sh
+      - run:
+          name: bioconductor-biobase from bioconda
+          command: bash scripts/test-bioconductor-biobase.sh
       - store_artifacts:
           path: list/
           destination: list
