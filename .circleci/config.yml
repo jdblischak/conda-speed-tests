@@ -58,6 +58,12 @@ jobs:
       - store_artifacts:
           path: time/
           destination: time
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - list/
+            - log/
+            - time/
   conda_4.4.10:
     environment:
       VER: 4.4.10
@@ -116,6 +122,12 @@ jobs:
       - store_artifacts:
           path: time/
           destination: time
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - list/
+            - log/
+            - time/
   conda_4.5.12:
     environment:
       VER: 4.5.12
@@ -174,6 +186,12 @@ jobs:
       - store_artifacts:
           path: time/
           destination: time
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - list/
+            - log/
+            - time/
   conda_latest_release:
     environment:
       VER: latest_release
@@ -237,6 +255,12 @@ jobs:
       - store_artifacts:
           path: time/
           destination: time
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - list/
+            - log/
+            - time/
   conda_latest_commit:
     environment:
       VER: latest_commit
@@ -298,6 +322,28 @@ jobs:
       - store_artifacts:
           path: time/
           destination: time
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - list/
+            - log/
+            - time/
+  report:
+    docker:
+      - image: rocker/tidyverse:3.5.2
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Check R version
+          command: R --version
+      - run:
+          name: Check files available
+          command: |
+            pwd
+            ls
+            ls -R
 workflows:
   version: 2
   all:
@@ -307,4 +353,11 @@ workflows:
       - conda_4.5.12
       - conda_latest_release
       - conda_latest_commit
+      - report:
+          requires:
+            - conda_4.3.27p0
+            - conda_4.4.10
+            - conda_4.5.12
+            - conda_latest_release
+            - conda_latest_commit
 
