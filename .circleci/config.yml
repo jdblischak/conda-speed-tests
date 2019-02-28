@@ -1,60 +1,5 @@
 version: 2
 jobs:
-  conda_4.2.12:
-    environment:
-      VER: 4.2.12
-    docker:
-      - image: continuumio/miniconda3:4.2.12
-    steps:
-      - checkout
-      - run:
-          name: Install system dependencies
-          command: bash scripts/install-system.sh
-      - run:
-          name: Configure conda
-          command: bash scripts/config-conda.sh
-      - run:
-          name: numpy from defaults
-          command: bash scripts/test-numpy-defaults.sh
-      - run:
-          name: numpy from conda-forge
-          command: bash scripts/test-numpy-cf.sh
-      - run:
-          name: scikit-learn from defaults
-          command: bash scripts/test-scikit-learn-defaults.sh
-      - run:
-          name: scikit-learn from conda-forge
-          command: bash scripts/test-scikit-learn-cf.sh
-      - run:
-          name: r-base from defaults
-          command: bash scripts/test-r-base-defaults.sh
-      - run:
-          name: r-base from conda-forge
-          command: bash scripts/test-r-base-cf.sh
-      - run:
-          name: r-devtools from defaults
-          command: bash scripts/test-r-devtools-defaults.sh
-      - run:
-          name: r-devtools from conda-forge
-          command: bash scripts/test-r-devtools-cf.sh
-      - run:
-          name: bioconductor-biobase from bioconda
-          command: bash scripts/test-bioconductor-biobase.sh
-      - run:
-          name: bioconductor-limma from bioconda
-          command: bash scripts/test-bioconductor-limma.sh
-      - run:
-          name: r-workflowr from jdblischak
-          command: bash scripts/test-r-workflowr-jdblischak.sh
-      - store_artifacts:
-          path: list/
-          destination: list
-      - store_artifacts:
-          path: log/
-          destination: log
-      - store_artifacts:
-          path: time/
-          destination: time
   conda_4.3.27p0:
     environment:
       VER: 4.3.27p0
@@ -165,11 +110,66 @@ jobs:
       - store_artifacts:
           path: time/
           destination: time
+  conda_4.5.12:
+    environment:
+      VER: 4.5.12
+    docker:
+      - image: continuumio/miniconda3:4.5.12
+    steps:
+      - checkout
+      - run:
+          name: Install system dependencies
+          command: bash scripts/install-system.sh
+      - run:
+          name: Configure conda
+          command: bash scripts/config-conda.sh
+      - run:
+          name: numpy from defaults
+          command: bash scripts/test-numpy-defaults.sh
+      - run:
+          name: numpy from conda-forge
+          command: bash scripts/test-numpy-cf.sh
+      - run:
+          name: scikit-learn from defaults
+          command: bash scripts/test-scikit-learn-defaults.sh
+      - run:
+          name: scikit-learn from conda-forge
+          command: bash scripts/test-scikit-learn-cf.sh
+      - run:
+          name: r-base from defaults
+          command: bash scripts/test-r-base-defaults.sh
+      - run:
+          name: r-base from conda-forge
+          command: bash scripts/test-r-base-cf.sh
+      - run:
+          name: r-devtools from defaults
+          command: bash scripts/test-r-devtools-defaults.sh
+      - run:
+          name: r-devtools from conda-forge
+          command: bash scripts/test-r-devtools-cf.sh
+      - run:
+          name: bioconductor-biobase from bioconda
+          command: bash scripts/test-bioconductor-biobase.sh
+      - run:
+          name: bioconductor-limma from bioconda
+          command: bash scripts/test-bioconductor-limma.sh
+      - run:
+          name: r-workflowr from jdblischak
+          command: bash scripts/test-r-workflowr-jdblischak.sh
+      - store_artifacts:
+          path: list/
+          destination: list
+      - store_artifacts:
+          path: log/
+          destination: log
+      - store_artifacts:
+          path: time/
+          destination: time
 workflows:
   version: 2
   all:
     jobs:
-      - conda_4.2.12
       - conda_4.3.27p0
       - conda_4.4.10
+      - conda_4.5.12
 
