@@ -1,0 +1,124 @@
+---
+title: "conda speed tests"
+author: John Blischak
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Motivation
+
+The conda package and environment manager is extremely useful. I've invested a
+lot of time maintaining R packages for the conda-forge channel and helping
+others adopt conda for their projects. However, recent versions have become
+extremely slow ([Issue #7239][7239], [Issue #8291][8291]). One advantage of conda
+over a more heavy weight option like Docker/singularity is that it is much
+easier to create new environments or add/remove specific packages, but this
+advantage is lost if it takes 30 minutes to install a package. I have been using
+conda to configure the environment for CI builds, but now the initial conda step
+either takes up most of the available CI time, or more often than not it stalls.
+
+[7239]: https://github.com/conda/conda/issues/7239
+[8291]: https://github.com/conda/conda/issues/8291
+
+## Overview
+
+I have created a GitHub repository [conda-speed-tests][] and configured a
+[CircleCI workflow][circle] to time conda commands for my common use cases.
+Specifically, I tested the following versions of conda:
+
+* Latest release
+* Latest commit
+
+For the following use cases:
+
+* [Install numpy from defaults channel][]
+* [Install numpy from conda-forge][]
+* [Install scikit-learn from defaults][]
+* [Install scikit-learn from conda-forge][]
+* [Install r-base from defaults][]
+* [Install r-base from conda-forge][]
+* [Install r-devtools from defaults][]
+* [Install r-devtools from conda-forge][]
+* [Install bioconductor-biobase from bioconda][]
+* [Install bioconductor-limma from bioconda][]
+* [Install r-workflowr from jdblischak][]
+* [Install bioconductor-scde from jdblischak][]
+
+[conda-speed-tests]: https://github.com/jdblischak/conda-speed-tests
+[circle]: https://circleci.com/gh/jdblischak/conda-speed-tests
+
+## Install numpy from defaults channel
+
+```
+conda install numpy
+```
+
+## Install numpy from conda-forge
+
+```
+conda install -c conda-forge numpy
+```
+
+## Install scikit-learn from defaults
+
+```
+conda install scikit-learn
+```
+
+## Install scikit-learn from conda-forge
+
+```
+conda install -c conda-forge scikit-learn
+```
+
+## Install r-base from defaults
+
+```
+conda install r-base
+```
+
+## Install r-base from conda-forge
+
+```
+conda install -c conda-forge r-base
+```
+
+## Install r-devtools from defaults
+
+```
+conda install r-devtools
+```
+
+## Install r-devtools from conda-forge
+
+```
+conda install -c conda-forge r-devtools
+```
+
+## Install bioconductor-biobase from bioconda
+
+```
+conda install -c conda-forge -c bioconda bioconductor-biobase
+```
+
+## Install bioconductor-limma from bioconda
+
+```
+conda install -c conda-forge -c bioconda bioconductor-limma
+```
+
+## Install r-workflowr from jdblischak
+
+```
+conda install -c conda-forge -c jdblischak r-workflowr=0.11.0
+```
+
+## Install bioconductor-scde from jdblischak
+
+```
+conda install -c conda-forge -c bioconda -c jdblischak bioconductor-scde=1.99.1
+```

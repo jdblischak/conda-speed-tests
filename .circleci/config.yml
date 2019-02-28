@@ -341,19 +341,28 @@ jobs:
       - run:
           name: Install analysis packages
           command: |
-            conda install r-base \
+            conda install -c conda-forge \
+                          git \
+                          r-base \
                           r-dplyr \
                           r-ggplot2 \
-                          r-rmarkdown
+                          r-rmarkdown \
+                          r-stringr
       - run:
-          name: Check R version
-          command: R --version
-      - run:
-          name: Check files available
+          name: Build report
           command: |
-            pwd
-            ls
-            ls -R
+            Rscript -e 'rmarkdown::render("index.Rmd")'
+            mkdir -p docs/
+            mv index.html docs/
+      - run:
+          name: Commit report
+          command: |
+            git status
+            git config user.name CircleCI
+            git config user.email CircleCI
+            git add docs/index.html
+            git commit -m "Update report [skip ci]"
+            git status
 workflows:
   version: 2
   all:
