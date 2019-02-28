@@ -190,7 +190,7 @@ jobs:
       - run:
           name: Update to latest release of conda
           command: |
-            conda update conda
+            conda update --quiet conda
             conda --version
       - run:
           name: numpy from defaults
