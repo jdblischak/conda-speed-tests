@@ -46,6 +46,9 @@ jobs:
       - run:
           name: r-workflowr from jdblischak
           command: bash scripts/test-r-workflowr-jdblischak.sh
+      - run:
+          name: bioconductor-scde from jdblischak
+          command: bash scripts/test-bioconductor-scde-jdblischak.sh
       - store_artifacts:
           path: list/
           destination: list
@@ -101,6 +104,9 @@ jobs:
       - run:
           name: r-workflowr from jdblischak
           command: bash scripts/test-r-workflowr-jdblischak.sh
+      - run:
+          name: bioconductor-scde from jdblischak
+          command: bash scripts/test-bioconductor-scde-jdblischak.sh
       - store_artifacts:
           path: list/
           destination: list
@@ -156,6 +162,9 @@ jobs:
       - run:
           name: r-workflowr from jdblischak
           command: bash scripts/test-r-workflowr-jdblischak.sh
+      - run:
+          name: bioconductor-scde from jdblischak
+          command: bash scripts/test-bioconductor-scde-jdblischak.sh
       - store_artifacts:
           path: list/
           destination: list
