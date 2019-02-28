@@ -330,11 +330,21 @@ jobs:
             - time/
   report:
     docker:
-      - image: rocker/tidyverse:3.5.2
+      - image: continuumio/miniconda3:4.3.27p0
     steps:
       - checkout
       - attach_workspace:
           at: ./
+      - run:
+          name: Configure conda
+          command: bash scripts/config-conda.sh
+      - run:
+          name: Install analysis packages
+          command: |
+            conda install r-base \
+                          r-dplyr \
+                          r-ggplot2 \
+                          r-rmarkdown
       - run:
           name: Check R version
           command: R --version
