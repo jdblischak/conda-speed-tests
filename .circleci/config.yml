@@ -345,6 +345,7 @@ jobs:
                           git \
                           r-base \
                           r-dplyr \
+                          r-fs \
                           r-ggplot2 \
                           r-rmarkdown \
                           r-stringr
@@ -354,6 +355,9 @@ jobs:
             Rscript -e 'rmarkdown::render("index.Rmd")'
             mkdir -p docs/
             mv index.html docs/
+      - add_ssh_keys:
+          fingerprints:
+            - "19:22:95:f8:08:e2:f5:0e:ef:47:d2:0e:1a:0b:96:5e"
       - run:
           name: Commit report
           command: |
@@ -363,6 +367,11 @@ jobs:
             git add docs/index.html
             git commit -m "Update report [skip ci]"
             git status
+            git remote add origin git@github.com:jdblischak/conda-speed-tests.git
+            git push origin master
+      - store_artifacts:
+          path: docs/
+          destination: docs
 workflows:
   version: 2
   all:

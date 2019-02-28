@@ -6,7 +6,9 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, error = TRUE)
+library(fs)
+library(stringr)
 ```
 
 ## Motivation
@@ -33,6 +35,15 @@ Specifically, I tested the following versions of conda:
 * Latest release
 * Latest commit
 
+```{r versions}
+files <- dir_ls("log")
+versions <- files
+versions <- str_replace(versions, "^log/", "")
+versions <- str_replace(versions, ".txt$", "")
+versions <- str_extract(versions, "[\\.,a-z,0-9]+$")
+versions
+```
+
 For the following use cases:
 
 * [Install numpy from defaults channel][]
@@ -53,11 +64,27 @@ For the following use cases:
 
 ## Install numpy from defaults channel
 
+```{r numpy-defaults}
+files <- dir_ls("time", glob = "numpy-defaults*")
+for (f in files) {
+  print(f)
+  print(readLines(f))
+}
+```
+
 ```
 conda install numpy
 ```
 
 ## Install numpy from conda-forge
+
+```{r numpy-cf}
+files <- dir_ls("time", glob = "numpy-cf*")
+for (f in files) {
+  print(f)
+  print(readLines(f))
+}
+```
 
 ```
 conda install -c conda-forge numpy
