@@ -367,7 +367,7 @@ jobs:
             git add docs/index.html
             git commit -m "Update report [skip ci]"
             git status
-            git remote add origin git@github.com:jdblischak/conda-speed-tests.git
+            git remote -v
             git push origin master
       - store_artifacts:
           path: docs/
@@ -378,14 +378,14 @@ workflows:
     jobs:
       - conda_4.3.27p0
       - conda_4.4.10
-      - conda_4.5.12
-      - conda_latest_release
-      - conda_latest_commit
+#      - conda_4.5.12
+#      - conda_latest_release
+#      - conda_latest_commit
       - report:
           requires:
             - conda_4.3.27p0
             - conda_4.4.10
-            - conda_4.5.12
-            - conda_latest_release
-            - conda_latest_commit
+#            - conda_4.5.12
+#            - conda_latest_release
+#            - conda_latest_commit
 

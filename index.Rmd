@@ -1,12 +1,12 @@
 ---
 title: "conda speed tests"
 author: John Blischak
-date: "`r Sys.Date()`"
+date: "`r Sys.time()`"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, error = TRUE)
+knitr::opts_chunk$set(echo = TRUE, error = TRUE)
 library(fs)
 library(stringr)
 ```
@@ -41,7 +41,7 @@ versions <- files
 versions <- str_replace(versions, "^log/", "")
 versions <- str_replace(versions, ".txt$", "")
 versions <- str_extract(versions, "[\\.,a-z,0-9]+$")
-versions
+unique(versions)
 ```
 
 For the following use cases:
@@ -66,6 +66,7 @@ For the following use cases:
 
 ```{r numpy-defaults}
 files <- dir_ls("time", glob = "numpy-defaults*")
+print(files)
 for (f in files) {
   print(f)
   print(readLines(f))
@@ -80,6 +81,7 @@ conda install numpy
 
 ```{r numpy-cf}
 files <- dir_ls("time", glob = "numpy-cf*")
+print(files)
 for (f in files) {
   print(f)
   print(readLines(f))
@@ -148,4 +150,8 @@ conda install -c conda-forge -c jdblischak r-workflowr=0.11.0
 
 ```
 conda install -c conda-forge -c bioconda -c jdblischak bioconductor-scde=1.99.1
+```
+
+```{bash}
+ls -R
 ```
