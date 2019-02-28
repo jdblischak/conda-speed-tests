@@ -5,12 +5,12 @@ set -eux
 
 conda config --add channels defaults
 conda config --add channels conda-forge
-conda create --quiet -n scikit-learn-cf python
+conda create -n scikit-learn-cf python
 
 mkdir -p list/ log/ time/
 
 /usr/bin/time -f "%e %U %S %P %M" -o time/scikit-learn-cf-${VER}.txt \
-  conda install --quiet -vv -n scikit-learn-cf scikit-learn \
+  conda install -vv -n scikit-learn-cf scikit-learn \
   2> log/scikit-learn-cf-${VER}.txt
 
 conda list -n scikit-learn-cf > list/scikit-learn-cf-${VER}.txt

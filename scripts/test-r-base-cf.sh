@@ -5,12 +5,12 @@ set -eux
 
 conda config --add channels defaults
 conda config --add channels conda-forge
-conda create --quiet -n r-base-cf python
+conda create -n r-base-cf python
 
 mkdir -p list/ log/ time/
 
 /usr/bin/time -f "%e %U %S %P %M" -o time/r-base-cf-${VER}.txt \
-  conda install --quiet -vv -n r-base-cf r-base \
+  conda install -vv -n r-base-cf r-base \
   2> log/r-base-cf-${VER}.txt
 
 conda list -n r-base-cf > list/r-base-cf-${VER}.txt
