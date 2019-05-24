@@ -24,7 +24,7 @@ steps: &steps
         command: bash scripts/test.sh scikit-defaults scikit-learn defaults
     - run:
         name: scikit-learn from conda-forge
-        command: bash scripts/test.sh scikit-cf numpy defaults conda-forge
+        command: bash scripts/test.sh scikit-cf scikit-learn defaults conda-forge
 #    - run:
 #        name: r-base from defaults
 #        command: bash scripts/test-r-base-defaults.sh

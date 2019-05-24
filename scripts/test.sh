@@ -9,6 +9,8 @@ shift
 shift
 channels=$@
 
+version=`conda --version | cut -d' ' -f2`
+
 # Setup
 
 for channel in $channels
@@ -26,11 +28,13 @@ CONDA_INSTRUMENTATION_ENABLED=1 conda install -n env-$id $pkg -vv | tee conda-de
 
 # Record results
 
-mv conda-debug-output.txt log/conda-debug-output_${id}_${VER}.txt
-mv ~/.conda/instrumentation-record.csv log/instrumentation-record_${id}_${VER}.csv
-conda info > log/conda-info_${id}_${VER}.txt
-conda config --show-sources > log/conda-config_${id}_${VER}.txt
-conda list --show-channel-urls -n env-$id > log/conda-config_${id}_${VER}.txt
+echo $pkg > log/package_${id}_${version}.txt
+conda config --get channels > log/channels_${id}_${version}.txt
+mv conda-debug-output.txt log/conda-debug-output_${id}_${version}.txt
+mv ~/.conda/instrumentation-record.csv log/instrumentation-record_${id}_${version}.csv
+conda info > log/conda-info_${id}_${version}.txt
+conda config --show-sources > log/conda-config_${id}_${version}.txt
+conda list --show-channel-urls -n env-$id > log/conda-list_${id}_${version}.txt
 
 # Cleanup
 
