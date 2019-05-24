@@ -8,12 +8,12 @@ conda config --set quiet yes
 conda config --set changeps1 no
 conda config --set auto_update_conda no
 
-if [ $VER -eq "latest_release" ]
+if [ $VER = "latest_release" ]
 then
 
   conda update conda
 
-elif [ $VER -eq "latest_commit" ]
+elif [ $VER = "latest_commit" ]
 then
 
   # Install latest version of conda (most recent commit)
