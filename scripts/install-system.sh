@@ -5,5 +5,6 @@ set -eux
 
 apt-get update
 apt-get install --yes --no-install-recommends \
+  fonts-texgyre \
+  nano \
   time
-
