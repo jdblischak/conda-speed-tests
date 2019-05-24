@@ -1,4 +1,5 @@
 version: 2
+
 docker_image: &docker_image
     docker:
       - image: continuumio/miniconda3:latest
@@ -24,30 +25,30 @@ steps: &steps
     - run:
         name: scikit-learn from conda-forge
         command: bash scripts/test-scikit-learn-cf.sh
-    - run:
-        name: r-base from defaults
-        command: bash scripts/test-r-base-defaults.sh
-    - run:
-        name: r-base from conda-forge
-        command: bash scripts/test-r-base-cf.sh
-    - run:
-        name: r-devtools from defaults
-        command: bash scripts/test-r-devtools-defaults.sh
-    - run:
-        name: r-devtools from conda-forge
-        command: bash scripts/test-r-devtools-cf.sh
-    - run:
-        name: bioconductor-biobase from bioconda
-        command: bash scripts/test-bioconductor-biobase.sh
-    - run:
-        name: bioconductor-limma from bioconda
-        command: bash scripts/test-bioconductor-limma.sh
-    - run:
-        name: r-workflowr from jdblischak
-        command: bash scripts/test-r-workflowr-jdblischak.sh
-    - run:
-        name: bioconductor-scde from jdblischak
-        command: bash scripts/test-bioconductor-scde-jdblischak.sh
+#    - run:
+#        name: r-base from defaults
+#        command: bash scripts/test-r-base-defaults.sh
+#    - run:
+#        name: r-base from conda-forge
+#        command: bash scripts/test-r-base-cf.sh
+#    - run:
+#        name: r-devtools from defaults
+#        command: bash scripts/test-r-devtools-defaults.sh
+#    - run:
+#        name: r-devtools from conda-forge
+#        command: bash scripts/test-r-devtools-cf.sh
+#    - run:
+#        name: bioconductor-biobase from bioconda
+#        command: bash scripts/test-bioconductor-biobase.sh
+#    - run:
+#        name: bioconductor-limma from bioconda
+#        command: bash scripts/test-bioconductor-limma.sh
+#    - run:
+#        name: r-workflowr from jdblischak
+#        command: bash scripts/test-r-workflowr-jdblischak.sh
+#    - run:
+#        name: bioconductor-scde from jdblischak
+#        command: bash scripts/test-bioconductor-scde-jdblischak.sh
     - store_artifacts:
         path: list/
         destination: list
@@ -65,9 +66,9 @@ steps: &steps
           - time/
 
 jobs:
-  conda_4.3.27p0:
+  conda_4.3.27:
     environment:
-      VER: 4.3.27p0
+      VER: 4.3.27
     <<: *docker_image
     <<: *steps
 
@@ -77,43 +78,28 @@ jobs:
     <<: *docker_image
     <<: *steps
 
-#  conda_4.5.12:
-#    environment:
-#      VER: 4.5.12
-#    docker:
-#      - image: continuumio/miniconda3:4.5.12
-#    steps:
-#      <<: *setup
-#      <<: *tests
-#      <<: *store
-#
-#  conda_latest_release:
-#    environment:
-#      VER: latest_release
-#    docker:
-#      - image: continuumio/miniconda3:latest
-#    steps:
-#      - *setup
-#      - *release
-#      - *tests
-#      - *store
-#
-#  conda_latest_commit:
-#    environment:
-#      VER: latest_commit
-#    docker:
-#      - image: continuumio/miniconda3:latest
-#    steps:
-#      <<: *setup
-#      - run:
-#          name: Install latest conda
-#          command: bash scripts/install-latest-conda.sh
-#      <<: *tests
-#      <<: *store
+  conda_4.5.12:
+    environment:
+      VER: 4.5.12
+    <<: *docker_image
+    <<: *steps
+
+  conda_latest_release:
+    environment:
+      VER: latest_release
+    <<: *docker_image
+    <<: *steps
+
+  conda_latest_commit:
+    environment:
+      VER: latest_commit
+    <<: *docker_image
+    <<: *steps
 
   report:
-    docker:
-      - image: continuumio/miniconda3:4.3.27p0
+    environment:
+      VER: 4.3.27
+    <<: *docker_image
     steps:
       - checkout
       - attach_workspace:
@@ -160,16 +146,15 @@ workflows:
   version: 2
   all:
     jobs:
-      - conda_4.3.27p0
+      - conda_4.3.27
       - conda_4.4.10
-#      - conda_4.5.12
-#      - conda_latest_release
-#      - conda_latest_commit
+      - conda_4.5.12
+      - conda_latest_release
+      - conda_latest_commit
       - report:
           requires:
-            - conda_4.3.27p0
+            - conda_4.3.27
             - conda_4.4.10
-#            - conda_4.5.12
-#            - conda_latest_release
-#            - conda_latest_commit
-
+            - conda_4.5.12
+            - conda_latest_release
+            - conda_latest_commit
