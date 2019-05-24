@@ -15,16 +15,16 @@ steps: &steps
         command: bash scripts/config-conda.sh
     - run:
         name: numpy from defaults
-        command: bash scripts/test-numpy-defaults.sh
+        command: bash scripts/test.sh numpy-defaults numpy defaults
     - run:
         name: numpy from conda-forge
-        command: bash scripts/test-numpy-cf.sh
+        command: bash scripts/test.sh numpy-defaults numpy defaults conda-forge
     - run:
         name: scikit-learn from defaults
-        command: bash scripts/test-scikit-learn-defaults.sh
+        command: bash scripts/test.sh numpy-defaults scikit-learn defaults
     - run:
         name: scikit-learn from conda-forge
-        command: bash scripts/test-scikit-learn-cf.sh
+        command: bash scripts/test.sh numpy-defaults numpy defaults conda-forge
 #    - run:
 #        name: r-base from defaults
 #        command: bash scripts/test-r-base-defaults.sh
@@ -50,20 +50,12 @@ steps: &steps
 #        name: bioconductor-scde from jdblischak
 #        command: bash scripts/test-bioconductor-scde-jdblischak.sh
     - store_artifacts:
-        path: list/
-        destination: list
-    - store_artifacts:
         path: log/
         destination: log
-    - store_artifacts:
-        path: time/
-        destination: time
     - persist_to_workspace:
         root: ./
         paths:
-          - list/
           - log/
-          - time/
 
 jobs:
   conda_4.3.27:
