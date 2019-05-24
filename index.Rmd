@@ -7,7 +7,10 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, error = TRUE)
+library(dplyr)
 library(fs)
+library(ggplot2)
+library(glue)
 library(stringr)
 ```
 
@@ -30,128 +33,63 @@ either takes up most of the available CI time, or more often than not it stalls.
 
 I have created a GitHub repository [conda-speed-tests][] and configured a
 [CircleCI workflow][circle] to time conda commands for my common use cases.
-Specifically, I tested the following versions of conda:
-
-* Latest release
-* Latest commit
-
-```{r versions}
-files <- dir_ls("log")
-versions <- files
-versions <- str_replace(versions, "^log/", "")
-versions <- str_replace(versions, ".txt$", "")
-versions <- str_extract(versions, "[\\.,a-z,0-9]+$")
-unique(versions)
-```
-
-For the following use cases:
-
-* [Install numpy from defaults channel][]
-* [Install numpy from conda-forge][]
-* [Install scikit-learn from defaults][]
-* [Install scikit-learn from conda-forge][]
-* [Install r-base from defaults][]
-* [Install r-base from conda-forge][]
-* [Install r-devtools from defaults][]
-* [Install r-devtools from conda-forge][]
-* [Install bioconductor-biobase from bioconda][]
-* [Install bioconductor-limma from bioconda][]
-* [Install r-workflowr from jdblischak][]
-* [Install bioconductor-scde from jdblischak][]
 
 [conda-speed-tests]: https://github.com/jdblischak/conda-speed-tests
 [circle]: https://circleci.com/gh/jdblischak/conda-speed-tests
 
-## Install numpy from defaults channel
+```{r versions}
+files <- dir_ls("log", glob = "*package_*.txt")
+files_split <- str_split_fixed(files, "_", n = 3)
+ids <- unique(files_split[, 2])
+versions <- unique(str_replace(files_split[, 3], ".txt$", ""))
+```
 
-```{r numpy-defaults}
-files <- dir_ls("time", glob = "numpy-defaults*")
-print(files)
-for (f in files) {
-  print(f)
-  print(readLines(f))
+```{r}
+list_instrument <- list()
+```
+
+
+## numpy-defaults
+
+```{r}
+id <- ids[1]
+for (v in versions) {
+  instrument <- read.csv(glue::glue("log/instrumentation-record_{id}_{v}.csv"),
+                         header = FALSE, stringsAsFactors = FALSE)
+  instrument[["version"]] <- v
+  list_instrument[[id]] <- rbind(list_instrument[[id]], instrument)
 }
+colnames(list_instrument[[id]]) <- c("step", "time", "version")
 ```
 
-```
-conda install numpy
-```
-
-## Install numpy from conda-forge
-
-```{r numpy-cf}
-files <- dir_ls("time", glob = "numpy-cf*")
-print(files)
-for (f in files) {
-  print(f)
-  print(readLines(f))
-}
+```{r}
+ggplot(list_instrument[[id]], aes(x = step, y = time)) +
+  geom_point() +
+  facet_wrap(~version, scales = "free_x") +
+  labs(title = id)
 ```
 
-```
-conda install -c conda-forge numpy
-```
-
-## Install scikit-learn from defaults
-
-```
-conda install scikit-learn
-```
-
-## Install scikit-learn from conda-forge
-
-```
-conda install -c conda-forge scikit-learn
+```{r}
+total <- list_instrument[[id]] %>%
+  group_by(version) %>%
+  summarize(time = sum(time))
+ggplot(total, aes(x = version, y = time)) +
+  geom_point() +
+  labs(title = id)
 ```
 
-## Install r-base from defaults
-
-```
-conda install r-base
-```
-
-## Install r-base from conda-forge
-
-```
-conda install -c conda-forge r-base
-```
-
-## Install r-devtools from defaults
-
-```
-conda install r-devtools
-```
-
-## Install r-devtools from conda-forge
-
-```
-conda install -c conda-forge r-devtools
-```
-
-## Install bioconductor-biobase from bioconda
-
-```
-conda install -c conda-forge -c bioconda bioconductor-biobase
-```
-
-## Install bioconductor-limma from bioconda
-
-```
-conda install -c conda-forge -c bioconda bioconductor-limma
-```
-
-## Install r-workflowr from jdblischak
-
-```
-conda install -c conda-forge -c jdblischak r-workflowr=0.11.0
-```
-
-## Install bioconductor-scde from jdblischak
-
-```
-conda install -c conda-forge -c bioconda -c jdblischak bioconductor-scde=1.99.1
-```
-
-```{bash}
-ls -R
+```{r results='asis'}
+config <- readLines(glue::glue("log/conda-config_{id}_{v}.txt"))
+config <- paste(config, collapse = "\n")
+glue::glue("
+<details>
+<summary>
+Output of <code>conda config --show-sources</code>
+</summary>
+<code>
+{config}
+</code>
+</details>
+"
+)
 ```
