@@ -95,33 +95,33 @@ jobs:
       <<: *tests
       <<: *store
 
-  conda_latest_release:
-    environment:
-      VER: latest_release
-    docker:
-      - image: continuumio/miniconda3:latest
-    steps:
-      <<: *setup
-      - run:
-          name: Update to latest release of conda
-          command: |
-            conda update conda
-            conda --version
-      <<: *tests
-      <<: *store
-
-  conda_latest_commit:
-    environment:
-      VER: latest_commit
-    docker:
-      - image: continuumio/miniconda3:latest
-    steps:
-      <<: *setup
-      - run:
-          name: Install latest conda
-          command: bash scripts/install-latest-conda.sh
-      <<: *tests
-      <<: *store
+#  conda_latest_release:
+#    environment:
+#      VER: latest_release
+#    docker:
+#      - image: continuumio/miniconda3:latest
+#    steps:
+#      <<: *setup
+#      - run:
+#          name: Update to latest release of conda
+#          command: |
+#            conda update conda
+#            conda --version
+#      <<: *tests
+#      <<: *store
+#
+#  conda_latest_commit:
+#    environment:
+#      VER: latest_commit
+#    docker:
+#      - image: continuumio/miniconda3:latest
+#    steps:
+#      <<: *setup
+#      - run:
+#          name: Install latest conda
+#          command: bash scripts/install-latest-conda.sh
+#      <<: *tests
+#      <<: *store
 
   report:
     docker:
