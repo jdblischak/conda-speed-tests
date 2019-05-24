@@ -255,9 +255,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type="text/css">
 .main-container {
@@ -288,8 +286,6 @@ summary {
 </style>
 
 
-
-<div class="container-fluid main-container">
 
 <!-- tabsets -->
 
@@ -364,14 +360,23 @@ $(document).ready(function () {
 
 
 
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
 
 <div class="fluid-row" id="header">
 
 
 
 <h1 class="title toc-ignore">conda speed tests</h1>
-<h4 class="author"><em>John Blischak</em></h4>
-<h4 class="date"><em>2019-02-28 22:24:14</em></h4>
+<h4 class="author">John Blischak</h4>
+<h4 class="date">2019-05-24 15:47:11</h4>
 
 </div>
 
@@ -393,7 +398,7 @@ versions &lt;- str_replace(versions, &quot;^log/&quot;, &quot;&quot;)
 versions &lt;- str_replace(versions, &quot;.txt$&quot;, &quot;&quot;)
 versions &lt;- str_extract(versions, &quot;[\\.,a-z,0-9]+$&quot;)
 unique(versions)</code></pre>
-<pre><code>## [1] &quot;4.3.27p0&quot; &quot;4.4.10&quot;</code></pre>
+<pre><code>## [1] &quot;4.3.27&quot;  &quot;4.4.10&quot;  &quot;4.5.12&quot;  &quot;commit&quot;  &quot;release&quot;</code></pre>
 <p>For the following use cases:</p>
 <ul>
 <li><a href="#install-numpy-from-defaults-channel">Install numpy from defaults channel</a></li>
@@ -484,60 +489,51 @@ print(files)</code></pre>
 ## index.html
 ## 
 ## ./list:
-## biobase-4.3.27p0.txt
-## biobase-4.4.10.txt
-## limma-4.3.27p0.txt
-## limma-4.4.10.txt
-## numpy-cf-4.3.27p0.txt
+## numpy-cf-4.3.27.txt
 ## numpy-cf-4.4.10.txt
-## numpy-defaults-4.3.27p0.txt
+## numpy-cf-4.5.12.txt
+## numpy-cf-latest_commit.txt
+## numpy-cf-latest_release.txt
+## numpy-defaults-4.3.27.txt
 ## numpy-defaults-4.4.10.txt
-## r-base-cf-4.3.27p0.txt
-## r-base-cf-4.4.10.txt
-## r-base-defaults-4.3.27p0.txt
-## r-base-defaults-4.4.10.txt
-## r-devtools-cf-4.3.27p0.txt
-## r-devtools-cf-4.4.10.txt
-## r-devtools-defaults-4.3.27p0.txt
-## r-devtools-defaults-4.4.10.txt
-## r-workflowr-jdb-4.3.27p0.txt
-## r-workflowr-jdb-4.4.10.txt
-## scde-4.3.27p0.txt
-## scde-4.4.10.txt
-## scikit-learn-cf-4.3.27p0.txt
+## numpy-defaults-4.5.12.txt
+## numpy-defaults-latest_commit.txt
+## numpy-defaults-latest_release.txt
+## scikit-learn-cf-4.3.27.txt
 ## scikit-learn-cf-4.4.10.txt
-## scikit-learn-defaults-4.3.27p0.txt
+## scikit-learn-cf-4.5.12.txt
+## scikit-learn-cf-latest_commit.txt
+## scikit-learn-cf-latest_release.txt
+## scikit-learn-defaults-4.3.27.txt
 ## scikit-learn-defaults-4.4.10.txt
+## scikit-learn-defaults-4.5.12.txt
+## scikit-learn-defaults-latest_commit.txt
+## scikit-learn-defaults-latest_release.txt
 ## 
 ## ./log:
-## biobase-4.3.27p0.txt
-## biobase-4.4.10.txt
-## limma-4.3.27p0.txt
-## limma-4.4.10.txt
-## numpy-cf-4.3.27p0.txt
+## numpy-cf-4.3.27.txt
 ## numpy-cf-4.4.10.txt
-## numpy-defaults-4.3.27p0.txt
+## numpy-cf-4.5.12.txt
+## numpy-cf-latest_commit.txt
+## numpy-cf-latest_release.txt
+## numpy-defaults-4.3.27.txt
 ## numpy-defaults-4.4.10.txt
-## r-base-cf-4.3.27p0.txt
-## r-base-cf-4.4.10.txt
-## r-base-defaults-4.3.27p0.txt
-## r-base-defaults-4.4.10.txt
-## r-devtools-cf-4.3.27p0.txt
-## r-devtools-cf-4.4.10.txt
-## r-devtools-defaults-4.3.27p0.txt
-## r-devtools-defaults-4.4.10.txt
-## r-workflowr-jdb-4.3.27p0.txt
-## r-workflowr-jdb-4.4.10.txt
-## scde-4.3.27p0.txt
-## scde-4.4.10.txt
-## scikit-learn-cf-4.3.27p0.txt
+## numpy-defaults-4.5.12.txt
+## numpy-defaults-latest_commit.txt
+## numpy-defaults-latest_release.txt
+## scikit-learn-cf-4.3.27.txt
 ## scikit-learn-cf-4.4.10.txt
-## scikit-learn-defaults-4.3.27p0.txt
+## scikit-learn-cf-4.5.12.txt
+## scikit-learn-cf-latest_commit.txt
+## scikit-learn-cf-latest_release.txt
+## scikit-learn-defaults-4.3.27.txt
 ## scikit-learn-defaults-4.4.10.txt
+## scikit-learn-defaults-4.5.12.txt
+## scikit-learn-defaults-latest_commit.txt
+## scikit-learn-defaults-latest_release.txt
 ## 
 ## ./scripts:
 ## config-conda.sh
-## install-latest-conda.sh
 ## install-system.sh
 ## test-bioconductor-biobase.sh
 ## test-bioconductor-limma.sh
@@ -554,30 +550,26 @@ print(files)</code></pre>
 ## time.sh
 ## 
 ## ./time:
-## biobase-4.3.27p0.txt
-## biobase-4.4.10.txt
-## limma-4.3.27p0.txt
-## limma-4.4.10.txt
-## numpy-cf-4.3.27p0.txt
+## numpy-cf-4.3.27.txt
 ## numpy-cf-4.4.10.txt
-## numpy-defaults-4.3.27p0.txt
+## numpy-cf-4.5.12.txt
+## numpy-cf-latest_commit.txt
+## numpy-cf-latest_release.txt
+## numpy-defaults-4.3.27.txt
 ## numpy-defaults-4.4.10.txt
-## r-base-cf-4.3.27p0.txt
-## r-base-cf-4.4.10.txt
-## r-base-defaults-4.3.27p0.txt
-## r-base-defaults-4.4.10.txt
-## r-devtools-cf-4.3.27p0.txt
-## r-devtools-cf-4.4.10.txt
-## r-devtools-defaults-4.3.27p0.txt
-## r-devtools-defaults-4.4.10.txt
-## r-workflowr-jdb-4.3.27p0.txt
-## r-workflowr-jdb-4.4.10.txt
-## scde-4.3.27p0.txt
-## scde-4.4.10.txt
-## scikit-learn-cf-4.3.27p0.txt
+## numpy-defaults-4.5.12.txt
+## numpy-defaults-latest_commit.txt
+## numpy-defaults-latest_release.txt
+## scikit-learn-cf-4.3.27.txt
 ## scikit-learn-cf-4.4.10.txt
-## scikit-learn-defaults-4.3.27p0.txt
-## scikit-learn-defaults-4.4.10.txt</code></pre>
+## scikit-learn-cf-4.5.12.txt
+## scikit-learn-cf-latest_commit.txt
+## scikit-learn-cf-latest_release.txt
+## scikit-learn-defaults-4.3.27.txt
+## scikit-learn-defaults-4.4.10.txt
+## scikit-learn-defaults-4.5.12.txt
+## scikit-learn-defaults-latest_commit.txt
+## scikit-learn-defaults-latest_release.txt</code></pre>
 </div>
 
 
