@@ -90,7 +90,7 @@ jobs:
 
   report:
     environment:
-      VER: 4.5.12
+      VER: latest_release
     <<: *docker_image
     steps:
       - checkout
