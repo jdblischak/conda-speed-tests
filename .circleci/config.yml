@@ -97,6 +97,15 @@ jobs:
       - attach_workspace:
           at: ./
       - run:
+          name: Install fonts
+          command: |
+            apt-get update
+            apt-get install --yes --no-install-recommends \
+              fonts-texgyre \
+              lmodern \
+              texlive-fonts-extra \
+              texlive-fonts-recommended
+      - run:
           name: Configure conda
           command: bash scripts/config-conda.sh
       - run:
@@ -104,8 +113,7 @@ jobs:
           command: |
             conda config --add channels conda-forge
             conda update --all
-            conda install -c conda-forge \
-                          git \
+            conda install git \
                           r-base \
                           r-dplyr \
                           r-fs \
